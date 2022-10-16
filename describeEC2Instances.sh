@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # resolve links - $0 may be a softlink
 PRG="$0"
 
@@ -34,7 +32,7 @@ Running Instances..."
 aws ec2 describe-instances \
    --region $AWSSOCKS_REGION \
    --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress,Name:Tags[?Key=='Name']|[0].Value,Type:InstanceType,Status:State.Name,VpcId:VpcId,InstanceId:InstanceId}" \
-   --filters Name=instance-state-name,Values=running \
+   --filters Name=instance-state-name,Values=pending,running \
    --no-cli-pager \
    --output table
 
