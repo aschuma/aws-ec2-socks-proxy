@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # resolve links - $0 may be a softlink
 PRG="$0"
 
