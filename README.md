@@ -1,11 +1,49 @@
-This repository holds Python scripts that set up a SOCKS proxy on an AWS EC2 instance, 
-enabling you to bypass GeoIP restrictions. 
+
+Sometimes, it is necessary to browse the Internet with privacy, 
+access content that is restricted by geography. 
+A VPN can help achieve this, but it requires either installing client software or subscribing
+to a VPN service.
+
+A more straightforward alternative is to use an encrypted SOCKS 
+proxy tunnel, which allows you to route your local network traffic 
+securely. When you use this proxy, all your applications will connect
+to an SSH server, which will forward the traffic to its intended 
+destination. As a result third parties
+will not be able to monitor your traffic or restrict access to websites.
+
+This can be achieved as follows.
+
+* Set up an EC2 instance on AWS in the region where you wish to access geopip protected content.
+* Establish a secure SSH tunnel from your local machine to the EC2 instance, forwarding traffic on port 4444.
+* The following SSH command is used to configure a SOCKS proxy on the local server, which forwards all traffic to the EC2 instance. 
+
+      ssh -o "StrictHostKeyChecking no" -C -N -i ~/.ssh/id_rsa ec2-user@18.133.223.240 -D 4444 
+
+* In this scenario, the EC2 instance is located at IP address `18.133.223.240`.
+* The SSH key being used is located at `~/.ssh/id_rsa` on the local machine. 
+* On the local machine, the SOCKS proxy has been set up to listen on port `4444`.
+* Configure your browser to use `localhost:4444` as the SOCKS proxy.
+
+## Content of this repository
+
+This repository holds Python scripts that set up an AWS EC2 instance and tear down the instance. 
+
+The first script will perform the following tasks:
+
+* Install a public key in the AWS region.
+* Configure a security group.
+* Launch a nano EC2 instance.
+* Output an ssh command to start the SOCKS proxy.
+
+The purpose of the second script is to shut down the EC2 instance.
 
 ## Disclaimer
+
 ***Please be advised that these scripts come with no guarantees, and you use them at your own risk.***
 
 ## Preconditions
-To utilize these scripts, you will need to have the following tools installed on your computer:
+
+To utilize these scripts, you will need to have the following tools/artifacts installed on your computer:
 
 * AWS CLI SDK (refer to the AWS CLI documentation for more information)
 * An SSH key generated with the ssh-keygen command
@@ -16,11 +54,13 @@ To utilize these scripts, you will need to have the following tools installed on
 The steps to use this repository are as follows:
 
 * Clone the project
-* Copy `env.py_template` to `env.py` and update the values for the SSH key name and AWS region in the newly created file.
+* Copy `env.py_template` to `env.py` and update the values for the SSH key name and AWS region in the newly created
+  file.
 * Create a virtual Python environment: `python3 -m venv`.
 * Install the requirements: `pip install requirements.txt`.
 * Activate the environment: `source venv/bin/activate`
-* Run `START.py`, which will start the EC2 instance. The script will provide an SSH command, which you should execute to start the SOCKS tunnel.
+* Run `START.py`, which will start the EC2 instance. The script will provide an SSH command, which you should execute to
+  start the SOCKS tunnel.
 * Configure your browser to use `localhost:4444` as the SOCKS proxy.
 
 You can now browse the web in your selected region without GeoIP restrictions.
@@ -30,7 +70,7 @@ To shut down the proxy, simply run the `STOP.py` script.
 ## Example script output
 
 ### Start
-        
+
         ❯ ./START.py              
         INFO: Found credentials in shared credentials file: ~/.aws/credentials
         INFO: ========================================================================================
@@ -69,8 +109,6 @@ To shut down the proxy, simply run the `STOP.py` script.
         INFO: Ready to create an ssh socks tunnel:
         INFO:     ssh -o "StrictHostKeyChecking no" -C -N  -i ~/.ssh/id_rsa  ec2-user@18.133.223.240 -D 4444
 
-
-
 ### Stop
 
         ❯ ./STOP.py
@@ -95,11 +133,9 @@ To shut down the proxy, simply run the `STOP.py` script.
         INFO: ----------------------------------------------------------------------------------------
         INFO: STOPPED
         INFO: ----------------------------------------------------------------------------------------
-        
-
-        
 
 ## Links
+
 * AWS account creation: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/
 * AWS CLI setup: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 * Some boto3 Python examples: https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python
