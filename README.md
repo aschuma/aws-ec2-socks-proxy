@@ -70,7 +70,7 @@ To shut down the proxy, simply run the `STOP.py` script.
 
 ### Start
 
-        ❯ ./START.py              
+        ❯ ./START.py
         INFO: Found credentials in shared credentials file: ~/.aws/credentials
         INFO: ========================================================================================
         INFO: STARTING
@@ -88,29 +88,33 @@ To shut down the proxy, simply run the `STOP.py` script.
         INFO: Found an Amazon Machine Image (AMI) that includes Amazon Linux 2, an x64 architecture, and a general-purpose EBS volume.
         INFO: {'Name': '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2', 'Type': 'String', 'Value': 'ami-0b2e759b077980407', 'Version': 77, 'LastModifiedDate': datetime.datetime(2023, 1, 26, 21, 43, 2, 625000, tzinfo=tzlocal()), 'ARN': 'arn:aws:ssm:eu-west-2::parameter/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2', 'DataType': 'text'}
         INFO: Verifying the configuration of the security group proxy_security_group.
-        INFO: The verification of the security group proxy_security_group configuration has been completed (sg-0019af4a5367fa7d1)
+        INFO: Creating a security group named proxy_security_group.
+        INFO: The security group proxy_security_group has been successfully created.
+        INFO: The verification of the security group proxy_security_group configuration has been completed (sg-0a5cec1b6d390ee34)
         INFO: Verifying the configuration of the public key id_rsa.
+        INFO: Uploading the key proxy_public_key.
+        INFO: The key proxy_public_key has been successfully uploaded (ec2.KeyPairInfo(name='proxy_public_key')).
         INFO: The key proxy_public_key with fingerprint 42:fc:74:51:2f:8b:62:9b:fb:8a:54:0f:d4:e3:7e:b4 has been found.
         INFO: The verification of the public key id_rsa configuration has been completed (proxy_public_key)
-        INFO: Creating an instance using the following parameters: {'ImageId': 'ami-0b2e759b077980407', 'InstanceType': 't2.micro', 'KeyName': 'proxy_public_key', 'SecurityGroupIds': ['sg-0019af4a5367fa7d1']}).
-        INFO: The instance i-024546de3d47d7d41 has been successfully created.
+        INFO: Creating an instance using the following parameters: {'ImageId': 'ami-0b2e759b077980407', 'InstanceType': 't2.micro', 'KeyName': 'proxy_public_key', 'SecurityGroupIds': ['sg-0a5cec1b6d390ee34']}).
+        INFO: The instance i-0ccd4cb047d744781 has been successfully created.
         INFO: Please wait while the newly created instance is starting up and becoming operational.
-        INFO: The newly created instance i-024546de3d47d7d41 is now fully operational and ready for use.
-        INFO: The IP address for i-024546de3d47d7d41 is 18.133.223.240.
-        INFO: The State for i-024546de3d47d7d41 is running.
+        INFO: The newly created instance i-0ccd4cb047d744781 is now fully operational and ready for use.
+        INFO: The IP address for i-0ccd4cb047d744781 is 13.41.70.170.
+        INFO: The State for i-0ccd4cb047d744781 is running.
         INFO: Summary:
-        INFO:  - instance id is  i-024546de3d47d7d41
-        INFO:  - public ip is 18.133.223.240
+        INFO:  - instance id is  i-0ccd4cb047d744781
+        INFO:  - public ip is 13.41.70.170
         INFO:  - state is running
         INFO: ----------------------------------------------------------------------------------------
         INFO: STARTED
         INFO: ----------------------------------------------------------------------------------------
         INFO: Ready to create an ssh socks tunnel:
-        INFO:     ssh -o "StrictHostKeyChecking no" -C -N  -i ~/.ssh/id_rsa  ec2-user@18.133.223.240 -D 4444
+        INFO:     ssh -o "StrictHostKeyChecking no" -C -N  -i ~/.ssh/id_rsa  ec2-user@13.41.70.170 -D 4444
 
 ### Stop
 
-        ❯ ./STOP.py
+         ./STOP.py 
         INFO: Found credentials in shared credentials file: ~/.aws/credentials
         INFO: ========================================================================================
         INFO: STOPPING
@@ -125,13 +129,13 @@ To shut down the proxy, simply run the `STOP.py` script.
         
         
         INFO: Instances that have the tag AWSSOCKS__MANAGED set to True:
-        INFO:   - i-024546de3d47d7d41 18.133.223.240 running
-        INFO: The instance i-024546de3d47d7d41 is being terminated.
-        INFO: Please wait until the termination of instance i-024546de3d47d7d41 has been completed.
-        INFO: The instance i-024546de3d47d7d41 has been successfully terminated.
+        INFO:   - i-0ccd4cb047d744781 13.41.70.170 running
+        INFO: The instance i-0ccd4cb047d744781 is being terminated.
+        INFO: Please wait until the termination of instance i-0ccd4cb047d744781 has been completed.
+        INFO: The instance i-0ccd4cb047d744781 has been successfully terminated.
         INFO: ----------------------------------------------------------------------------------------
         INFO: STOPPED
-        INFO: ----------------------------------------------------------------------------------------
+
 
 ## Links
 
