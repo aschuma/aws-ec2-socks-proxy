@@ -14,15 +14,14 @@ will not be able to monitor your traffic or restrict access to websites.
 This can be achieved as follows.
 
 * Set up an EC2 instance on AWS in the region where you wish to access geopip protected content.
-* Establish a secure SSH tunnel from your local machine to the EC2 instance, forwarding traffic on port 4444.
-* The following SSH command is used to configure a SOCKS proxy on the local server, which forwards all traffic to the EC2 instance. 
+* Establish a secure SSH tunnel from your local machine to the EC2 instance, forwarding traffic on port 4444. The following SSH command is used to configure a SOCKS proxy on the local server, which forwards all traffic to the EC2 instance. 
 
       ssh -o "StrictHostKeyChecking no" -C -N -i ~/.ssh/id_rsa ec2-user@18.133.223.240 -D 4444 
 
-* In this scenario, the EC2 instance is located at IP address `18.133.223.240`.
-* The SSH key being used is located at `~/.ssh/id_rsa` on the local machine. 
-* On the local machine, the SOCKS proxy has been set up to listen on port `4444`.
-* Configure your browser to use `localhost:4444` as the SOCKS proxy.
+  * In this scenario, the EC2 instance is located at IP address `18.133.223.240`.
+  * The SSH key being used is located at `~/.ssh/id_rsa` on the local machine. 
+  * On the local machine, the SOCKS proxy has been set up to listen on port `4444`.
+* As final step, we have to configure the browser to use `localhost:4444` as the SOCKS proxy. Voila.
 
 ## Content of this repository
 
