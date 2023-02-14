@@ -56,6 +56,7 @@ Additionally, Python 3 must be installed on your machine.
 The steps to use this repository are as follows:
 
 * Clone the project
+* Change directory into the cloned project by using the `cd` command.
 * Copy `env.py_template` to `env.py` and update the values for the SSH key name and AWS region in the newly created
   file.
 * Create a virtual Python environment: `python3 -m venv`.
