@@ -65,7 +65,7 @@ The steps to use this repository are as follows:
 
 You can now browse the web in your selected region without GeoIP restrictions.
 
-To shut down the proxy, simply run the `STOP.py` script.
+To shut down the EC2 instance, simply run the `STOP.py` script.
 
 ## Example script output
 
