@@ -1,31 +1,32 @@
-
-Sometimes, it is necessary to browse the Internet with privacy, 
-access content that is restricted by geography. 
+Sometimes, it is necessary to browse the Internet with privacy,
+access content that is restricted by geography.
 A VPN can help achieve this, but it requires either installing client software or subscribing
 to a VPN service.
 
-A more straightforward alternative is to use an encrypted SOCKS 
-proxy tunnel, which allows you to route your local network traffic 
+A more straightforward alternative is to use an encrypted SOCKS
+proxy tunnel, which allows you to route your local network traffic
 securely. When you use this proxy, all your applications will connect
-to an SSH server, which will forward the traffic to its intended 
+to an SSH server, which will forward the traffic to its intended
 destination. As a result third parties
 will not be able to monitor your traffic or restrict access to websites.
 
 This can be achieved as follows.
 
-* Set up an EC2 instance on AWS in the region where you wish to access geopip protected content.
-* Establish a secure SSH tunnel from your local machine to the EC2 instance, forwarding traffic on port 4444. The following SSH command is used to configure a SOCKS proxy on the local server, which forwards all traffic to the EC2 instance. 
+* Set up an EC2 instance on AWS in the region where you wish to access GeoIP protected content.
+* Establish a secure SSH tunnel from your local machine to the EC2 instance, forwarding traffic on port 4444. The
+  following SSH command is used to configure a SOCKS proxy on the local server, which forwards all traffic to the EC2
+  instance.
 
       ssh -o "StrictHostKeyChecking no" -C -N -i ~/.ssh/id_rsa ec2-user@18.133.223.240 -D 4444 
 
-  * In this scenario, the EC2 instance is located at IP address `18.133.223.240`.
-  * The SSH key being used is located at `~/.ssh/id_rsa` on the local machine. 
-  * On the local machine, the SOCKS proxy has been set up to listen on port `4444`.
+    * In this scenario, the EC2 instance is located at IP address `18.133.223.240`.
+    * The SSH key being used is located at `~/.ssh/id_rsa` on the local machine.
+    * On the local machine, the SOCKS proxy has been set up to listen on port `4444`.
 * As final step, we have to configure the browser to use `localhost:4444` as the SOCKS proxy. Voila.
 
 ## Content of this repository
 
-This repository holds Python scripts that set up an AWS EC2 instance and tear down the instance. 
+This repository holds Python scripts that set up an AWS EC2 instance and tear down the instance.
 
 The first script will perform the following tasks:
 
@@ -135,7 +136,6 @@ To shut down the proxy, simply run the `STOP.py` script.
         INFO: The instance i-0ccd4cb047d744781 has been successfully terminated.
         INFO: ----------------------------------------------------------------------------------------
         INFO: STOPPED
-
 
 ## Links
 

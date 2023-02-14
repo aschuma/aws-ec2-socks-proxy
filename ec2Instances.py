@@ -2,11 +2,10 @@
 
 import boto3
 from botocore.exceptions import ClientError
-
 from env import *
+from loggerFactory import logger_factory
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logger_factory(__name__)
 
 _ec2 = boto3.resource('ec2', region_name=AWSSOCKS_REGION)
 
@@ -48,13 +47,13 @@ def awssocks_create_instance(
             'Value': 'True'
         }])
         logger.info("The instance %s has been successfully created.", awssocks_instance.id)
-        logging.info("Please wait while the newly created instance is starting up and becoming operational.")
+        logger.info("Please wait while the newly created instance is starting up and becoming operational.")
         awssocks_instance.wait_until_running()
         awssocks_instance.load()
         logger.info("The newly created instance %s is now fully operational and ready for use.",
                     awssocks_instance.id)
     except ClientError:
-        logging.exception(
+        logger.exception(
             "Couldn't create instance with image %s, instance type %s, and key %s.",
             image_id, instance_type, key_name)
         raise
@@ -80,7 +79,7 @@ def awssocks_terminate_instance(instance_id):
             instance.wait_until_terminated()
             logger.info("The instance %s has been successfully terminated.", instance_id)
     except ClientError:
-        logging.exception("Couldn't terminate instance %s.", instance_id)
+        logger.exception("Couldn't terminate instance %s.", instance_id)
         raise
 
 
@@ -96,17 +95,17 @@ def list_awssocks_instances():
                 }
             ]
         )
-        logging.info(f'Instances that have the tag AWSSOCKS__MANAGED set to True:')
+        logger.info(f'Instances that have the tag AWSSOCKS__MANAGED set to True:')
         if awssocks_instance_list:
             for awssocks_instance in awssocks_instance_list:
-                logging.info(
+                logger.info(
                     f'  - {awssocks_instance.id} {awssocks_instance.public_ip_address} {awssocks_instance.state["Name"]}')
         else:
-            logging.info(f'  - none ')
+            logger.info(f'  - none ')
 
         return [awssocks_instance.id for awssocks_instance in awssocks_instance_list]
     except ClientError:
-        logging.exception("Couldn't lookup instances.")
+        logger.exception("Couldn't lookup instances.")
         raise
 
 
@@ -128,28 +127,28 @@ def list_awssocks_running_instances():
                 }
             ]
         )
-        logging.info(f'Running instances that have the tag AWSSOCKS__MANAGED set to True:')
+        logger.info(f'Running instances that have the tag AWSSOCKS__MANAGED set to True:')
         if awssocks_instance_list:
             for awssocks_instance in awssocks_instance_list:
-                logging.info(
+                logger.info(
                     f'  - {awssocks_instance.id} {awssocks_instance.public_ip_address} {awssocks_instance.state["Name"]}')
         else:
-            logging.info(f'  - none ')
+            logger.info(f'  - none ')
         return [awssocks_instance.id for awssocks_instance in awssocks_instance_list]
     except ClientError:
-        logging.exception("Couldn't lookup instances.")
+        logger.exception("Couldn't lookup instances.")
         raise
 
 
 def awssocks_instance_ip_address(instance_id):
     instance = _ec2.Instance(instance_id)
     public_ip = instance.public_ip_address
-    logging.info("The IP address for %s is %s.", instance_id, public_ip)
+    logger.info("The IP address for %s is %s.", instance_id, public_ip)
     return public_ip
 
 
 def awssocks_instance_state(instance_id):
     instance = _ec2.Instance(instance_id)
     state = instance.state["Name"]
-    logging.info("The State for %s is %s.", instance_id, state)
+    logger.info("The State for %s is %s.", instance_id, state)
     return state
