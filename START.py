@@ -4,17 +4,17 @@ from amiImages import awssocks_ami_image
 from ec2Instances import awssocks_create_instance, list_awssocks_instances, awssocks_instance_ip_address, \
     awssocks_instance_state
 from env import *
+from loggerFactory import logger_factory
 from publicKeys import init_awssocks_public_key
 from securityGroups import init_awssocks_security_group
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logger_factory(__name__)
 
 
 def start():
-    logging.info('=' * 88)
-    logging.info("STARTING")
-    logging.info('-' * 88)
+    logger.info('=' * 42)
+    logger.info("STARTING")
+    logger.info('-' * 42)
 
     log_configuration()
     list_awssocks_instances()
@@ -31,17 +31,18 @@ def start():
     public_ip = awssocks_instance_ip_address(awssocks_instance.id)
     state = awssocks_instance_state(awssocks_instance.id)
 
-    logging.info("Summary:")
-    logging.info(" - instance id is  %s", awssocks_instance.id)
-    logging.info(" - public ip is %s", public_ip)
-    logging.info(" - state is %s", state)
+    logger.info("Summary:")
+    logger.info(" - instance id is  %s", awssocks_instance.id)
+    logger.info(" - public ip is %s", public_ip)
+    logger.info(" - state is %s", state)
 
-    logging.info('-' * 88)
-    logging.info("STARTED")
-    logging.info('-' * 88)
-    logging.info("Ready to create an ssh socks tunnel:")
-    logging.info("    ssh -o \"StrictHostKeyChecking no\" -C -N  -i ~/.ssh/%s  ec2-user@%s -D 4444", AWSSOCKS_KEY,
-                 public_ip)
+    logger.info('-' * 42)
+    logger.info("STARTED")
+    logger.info('-' * 42)
+    logger.info("Ready to create an ssh socks tunnel:")
+    logger.info("    ssh -o \"StrictHostKeyChecking no\" -C -N  -i ~/.ssh/%s  ec2-user@%s -D 4444",
+                AWSSOCKS_KEY,
+                public_ip)
 
     return awssocks_instance
 

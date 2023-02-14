@@ -2,23 +2,27 @@
 
 from ec2Instances import list_awssocks_instances, awssocks_terminate_instance
 from env import *
+from loggerFactory import logger_factory
+from publicKeys import delete_awssocks_public_key
+from securityGroups import delete_awssocks_security_group
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logger_factory(__name__)
 
 
 def stop():
-    logging.info('=' * 88)
-    logging.info("STOPPING")
-    logging.info('-' * 88)
+    logger.info('=' * 42)
+    logger.info("STOPPING")
+    logger.info('-' * 42)
 
     log_configuration()
     awssocks_instance_list = list_awssocks_instances()
     for awssocks_instance in awssocks_instance_list:
         awssocks_terminate_instance(awssocks_instance)
-    logging.info('-' * 88)
-    logging.info("STOPPED")
-    logging.info('-' * 88)
+    delete_awssocks_public_key()
+    delete_awssocks_security_group()
+    logger.info('-' * 42)
+    logger.info("STOPPED")
+    logger.info('-' * 42)
 
 
 if __name__ == '__main__':
