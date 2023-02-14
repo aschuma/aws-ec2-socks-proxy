@@ -5,10 +5,11 @@ to a VPN service.
 
 A more straightforward alternative is to use an encrypted SOCKS
 proxy tunnel, which allows you to route your local network traffic
-securely. When you use this proxy, all your applications will connect
-to an SSH server, which will forward the traffic to its intended
-destination. As a result third parties
-will not be able to monitor your traffic or restrict access to websites.
+securely. When you use this proxy in your browser, the browser connects 
+to an SSH server, which then forwards the traffic to its intended 
+destination. As a result, third parties are unable to monitor your traffic 
+or restrict access to websites because they are unaware of the 
+browser's true location.
 
 This can be achieved as follows.
 
@@ -22,32 +23,33 @@ This can be achieved as follows.
     * In this scenario, the EC2 instance is located at IP address `18.133.223.240`.
     * The SSH key being used is located at `~/.ssh/id_rsa` on the local machine.
     * On the local machine, the SOCKS proxy has been set up to listen on port `4444`.
-* As final step, we have to configure the browser to use `localhost:4444` as the SOCKS proxy. Voila.
+* As a final step, configure your browser to use `localhost:4444` as the SOCKS proxy. Voila!
 
 ## Content of this repository
 
-This repository holds Python scripts that set up an AWS EC2 instance and tear down the instance.
+This repository holds two Python scripts that set up an AWS EC2 instance and tear down the instance.
 
 The first script will perform the following tasks:
 
 * Install a public key in the AWS region.
 * Configure a security group.
-* Launch a nano EC2 instance.
+* Launch a Nano EC2 instance using the public key and security group provided in the previous step.
 * Output an ssh command to start the SOCKS proxy.
 
 The purpose of the second script is to shut down the EC2 instance.
 
 ## Disclaimer
 
-***Please be advised that these scripts come with no guarantees, and you use them at your own risk.***
+***Please note that these scripts come with absolutely no guarantees, and you use them at your own risk. Running this code may result in charges to your AWS account.***
 
 ## Preconditions
 
-To utilize these scripts, you will need to have the following tools/artifacts installed on your computer:
+To proceed, you need an AWS account and must have your default credentials configured as described in the [AWS Tools and SDKs Shared Configuration and
+Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/creds-config-files.html).
 
-* AWS CLI SDK (refer to the AWS CLI documentation for more information)
-* An SSH key generated with the ssh-keygen command
-* Python3
+You will need an SSH key. To generate one, use the `ssh-keygen` command. You can easily find a tutorial online to learn how to use it.
+
+Additionally, Python 3 must be installed on your machine.
 
 ## Setup
 
@@ -61,7 +63,7 @@ The steps to use this repository are as follows:
 * Activate the environment: `source venv/bin/activate`
 * Run `START.py`, which will start the EC2 instance. The script will provide an SSH command, which you should execute to
   start the SOCKS tunnel.
-* Configure your browser to use `localhost:4444` as the SOCKS proxy.
+* Configure your browser to use `localhost:4444` as the SOCKS proxy. Please refer to the browser's documentation to learn how to do this.
 
 You can now browse the web in your selected region without GeoIP restrictions.
 
