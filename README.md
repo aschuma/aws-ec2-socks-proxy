@@ -3,15 +3,25 @@ access content that is restricted by geography.
 A VPN can help achieve this, but it requires either installing client software or subscribing
 to a VPN service.
 
-A more straightforward alternative is to use an encrypted SOCKS
-proxy tunnel, which allows you to route your local network traffic
-securely. When you use this proxy in your browser, the browser connects 
-to an SSH server, which then forwards the traffic to its intended 
-destination. As a result, third parties are unable to monitor your traffic 
-or restrict access to websites because they are unaware of the 
-browser's true location.
+A more straightforward alternative is to use an encrypted SSH SOCKS
+proxy tunnel.
 
-This can be achieved as follows.
+A SSH SOCKS tunnel is a secure method of transmitting network traffic between a client and a server
+through a SSH connection. SOCKS is an Internet protocol that allows a client to establish a TCP
+connection with any server via a proxy server. SSH is a protocol that provides a secure and encrypted
+channel between two systems over an insecure network.
+
+When a SSH client establishes a SOCKS tunnel with a SSH server, it sets up a local proxy server on the client machine
+that listens on a designated port. The client then configures its applications (such as a web browser) to use this local
+SOCKS proxy server.
+
+The SOCKS proxy server forwards the traffic from the client to the SSH server, which then relays the traffic to its
+intended destination.
+
+If the SSH server is located in a region that is not subject to GeoIP-restrictions, third parties will be unable to
+monitor your traffic or restrict access to websites because they will not know the true location of your browser
+
+And that's where AWS EC2 comes in:
 
 * Set up an EC2 instance on AWS in the region where you wish to access GeoIP protected content.
 * Establish a secure SSH tunnel from your local machine to the EC2 instance, forwarding traffic on port 4444. The
@@ -40,14 +50,17 @@ The purpose of the second script is to shut down the EC2 instance.
 
 ## Disclaimer
 
-***Please note that these scripts come with absolutely no guarantees, and you use them at your own risk. Running this code may result in charges to your AWS account.***
+***Please note that these scripts come with absolutely no guarantees, and you use them at your own risk. Running this
+code may result in charges to your AWS account.***
 
 ## Preconditions
 
-To proceed, you need an AWS account and must have your default credentials configured as described in the [AWS Tools and SDKs Shared Configuration and
+To proceed, you need an AWS account and must have your default credentials configured as described in
+the [AWS Tools and SDKs Shared Configuration and
 Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/creds-config-files.html).
 
-You will need an SSH key. To generate one, use the `ssh-keygen` command. You can easily find a tutorial online to learn how to use it.
+You will need an SSH key. To generate one, use the `ssh-keygen` command. You can easily find a tutorial online to learn
+how to use it.
 
 Additionally, Python 3 must be installed on your machine.
 
@@ -64,7 +77,8 @@ The steps to use this repository are as follows:
 * Activate the environment: `source venv/bin/activate`
 * Run `START.py`, which will start the EC2 instance. The script will provide an SSH command, which you should execute to
   start the SOCKS tunnel.
-* Configure your browser to use `localhost:4444` as the SOCKS proxy. Please refer to the browser's documentation to learn how to do this.
+* Configure your browser to use `localhost:4444` as the SOCKS proxy. Please refer to the browser's documentation to
+  learn how to do this.
 
 You can now browse the web in your selected region without GeoIP restrictions.
 
