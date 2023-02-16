@@ -17,7 +17,7 @@ def status():
     log_configuration()
     list_awssocks_instances()
     logger.info("Installed security group: %s", awssocks_security_group_id())
-    logger.info("Installed public: %s", awssocks_public_key())
+    logger.info("Installed public key: %s", awssocks_public_key())
 
     logger.info('-' * 42)
     logger.info("STATUS")
