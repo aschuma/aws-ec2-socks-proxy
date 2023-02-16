@@ -1,3 +1,23 @@
+## Content of this repository
+
+This repository holds two Python scripts that set up an AWS EC2 instance and tear down the instance.
+
+The first script will perform the following tasks:
+
+* Install a public key in the AWS region.
+* Configure a security group.
+* Launch a Nano EC2 instance using the public key and security group provided in the previous step.
+* Output an ssh command to start the SOCKS proxy.
+
+The purpose of the second script is to shut down the EC2 instance.
+
+## Disclaimer
+
+***Please note that these scripts come with absolutely no guarantees, and you use them at your own risk. Running this
+code may result in charges to your AWS account.***
+
+## Details
+
 Sometimes, it is necessary to browse the Internet with privacy,
 access content that is restricted by geography.
 A VPN can help achieve this, but it requires either installing client software or subscribing
@@ -35,23 +55,6 @@ And that's where AWS EC2 comes in:
     * On the local machine, the SOCKS proxy has been set up to listen on port `4444`.
 * As a final step, configure your browser to use `localhost:4444` as the SOCKS proxy. Voila!
 
-## Content of this repository
-
-This repository holds two Python scripts that set up an AWS EC2 instance and tear down the instance.
-
-The first script will perform the following tasks:
-
-* Install a public key in the AWS region.
-* Configure a security group.
-* Launch a Nano EC2 instance using the public key and security group provided in the previous step.
-* Output an ssh command to start the SOCKS proxy.
-
-The purpose of the second script is to shut down the EC2 instance.
-
-## Disclaimer
-
-***Please note that these scripts come with absolutely no guarantees, and you use them at your own risk. Running this
-code may result in charges to your AWS account.***
 
 ## Preconditions
 
