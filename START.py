@@ -39,7 +39,7 @@ def start():
     logger.info('-' * 42)
     logger.info("STARTED")
     logger.info('-' * 42)
-    logger.info("Ready to create an ssh socks tunnel:")
+    logger.info("Ready to create an ssh socks tunnel. Please execute the following command on the command line:")
     logger.info("    ssh -o \"StrictHostKeyChecking no\" -C -N  -i ~/.ssh/%s  ec2-user@%s -D 4444",
                 AWSSOCKS_KEY,
                 public_ip)
