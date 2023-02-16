@@ -7,7 +7,7 @@ The first script will perform the following tasks:
 * Install a public key in the AWS region.
 * Configure a security group.
 * Launch a Nano EC2 instance using the public key and security group provided in the previous step.
-* Output an ssh command to start the SOCKS proxy.
+* Output an ssh command to start an SOCKS proxy using the EC2 instance as target.
 
 The purpose of the second script is to shut down the EC2 instance.
 
