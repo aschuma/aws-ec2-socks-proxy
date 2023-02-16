@@ -4,7 +4,7 @@ This repository holds two Python scripts that set up an AWS EC2 instance and tea
 
 The first script will perform the following tasks:
 
-* Install a public key in the AWS region.
+* Install a public key in an AWS region.
 * Configure a security group.
 * Launch a Nano EC2 instance using the public key and security group provided in the previous step.
 * Output an ssh command to start an SOCKS proxy using the EC2 instance as target.
