@@ -130,7 +130,7 @@ To shut down the EC2 instance, simply run the `STOP.py` script.
         INFO: ----------------------------------------------------------------------------------------
         INFO: STARTED
         INFO: ----------------------------------------------------------------------------------------
-        INFO: Ready to create an ssh socks tunnel:
+        INFO: Ready to create an ssh socks tunnel. Please execute the following command on the command line:
         INFO:     ssh -o "StrictHostKeyChecking no" -C -N  -i ~/.ssh/id_rsa  ec2-user@13.41.70.170 -D 4444
 
 ### Stop
