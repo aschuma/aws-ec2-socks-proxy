@@ -53,7 +53,7 @@ And that's where AWS EC2 comes in:
     * In this scenario, the EC2 instance is located at IP address `18.133.223.240`.
     * The SSH key being used is located at `~/.ssh/id_rsa` on the local machine.
     * On the local machine, the SOCKS proxy has been set up to listen on port `4444`.
-* As a final step, configure your browser to use `localhost:4444` as the SOCKSv5 proxy. Voila!
+* As a final step, configure your browser to use `localhost:4444` as the SOCKSv5 proxy. Also, ensure that you have selected the option `Proxy DNS when using SOCKS v5` in your browser's proxy settings. Voila!
 
 
 ## Preconditions
@@ -80,8 +80,7 @@ The steps to use this repository are as follows:
 * Activate the environment: `source venv/bin/activate`
 * Run `START.py`, which will start the EC2 instance. The script will provide an SSH command, which you should execute to
   start the SOCKS tunnel.
-* Configure your browser to use `localhost:4444` as the SOCKSv5 proxy. Please refer to the browser's documentation to
-  learn how to do this.
+* Configure your browser to use `localhost:4444` as the SOCKSv5 proxy. In addition make sue that you select `Proxy DNS when using SOCKS v5`. Please refer to the browser's documentation to learn how to do this.
 
 You can now browse the web in your selected region without GeoIP restrictions.
 
