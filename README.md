@@ -53,7 +53,7 @@ And that's where AWS EC2 comes in:
     * In this scenario, the EC2 instance is located at IP address `18.133.223.240`.
     * The SSH key being used is located at `~/.ssh/id_rsa` on the local machine.
     * On the local machine, the SOCKS proxy has been set up to listen on port `4444`.
-* As a final step, configure your browser to use `localhost:4444` as the SOCKS proxy. Voila!
+* As a final step, configure your browser to use `localhost:4444` as the SOCKSv5 proxy. Voila!
 
 
 ## Preconditions
