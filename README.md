@@ -75,7 +75,7 @@ The steps to use this repository are as follows:
 * Change directory into the cloned project by using the `cd` command.
 * Copy `env.py_template` to `env.py` and update the values for the SSH key name and AWS region in the newly created
   file.
-* Create a virtual Python environment: `python3 -m venv`.
+* Create a virtual Python environment: `python3 -m venv venv && source venv/bin/activate`.
 * Install the requirements: `pip install requirements.txt`.
 * Activate the environment: `source venv/bin/activate`
 * Run `START.py`, which will start the EC2 instance. The script will provide an SSH command, which you should execute to
