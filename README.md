@@ -77,7 +77,7 @@ The steps to use this repository are as follows:
   file.
 * Create a virtual Python environment: `python3 -m venv venv`.
 * Activate the environment: `source venv/bin/activate`
-* Install the requirements: `pip install requirements.txt`.
+* Install the requirements: `pip install -r requirements.txt`.
 * Run `START.py`, which will start the EC2 instance. The script will provide an SSH command, which you should execute to
   start the SOCKS tunnel.
 * Configure your browser to use `localhost:4444` as the SOCKSv5 proxy. Also, ensure that you have selected the option `Proxy DNS when using SOCKS v5` in your browser's proxy settings. Please refer to the browser's documentation to learn how to do this.
