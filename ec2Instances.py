@@ -11,7 +11,7 @@ _ec2 = boto3.resource('ec2', region_name=AWSSOCKS_REGION)
 
 
 def awssocks_create_instance(
-        image_id, instance_type, key_name, security_group_ids=None):
+        image_id, instance_type, key_name, security_group_ids=None, terminate_instance_after_minutes=None):
     """
     Creates a new Amazon EC2 instance. The instance automatically starts immediately after
     it is created.
@@ -31,21 +31,37 @@ def awssocks_create_instance(
                                  access to the instance. When no security groups are
                                  specified, the default security group of the VPC
                                  is used.
+    :param terminate_instance_after_minutes: The number of minutes after which the instance
+                                             should terminate itself. If set to a non-negative
+                                             value, a userdata fragment will be added to shutdown
+                                             the instance after the given time.
     :return: The newly created instance.
     """
-    try:
+    try:        
         instance_params = {
             'ImageId': image_id, 'InstanceType': instance_type, 'KeyName': key_name
         }
+
+        if terminate_instance_after_minutes is not None and terminate_instance_after_minutes >= 0:
+            userdata = f"#!/bin/bash\n nohup shutdown -h +{terminate_instance_after_minutes} & \n"
+            instance_params['UserData'] = userdata
+
         if security_group_ids is not None:
             instance_params['SecurityGroupIds'] = security_group_ids
-        logger.info("Creating an instance using the following parameters: %s).", str(instance_params))
 
-        awssocks_instance = _ec2.create_instances(**instance_params, MinCount=1, MaxCount=1)[0]
-        awssocks_instance.create_tags(Tags=[{
-            'Key': 'AWSSOCKS__MANAGED',
-            'Value': 'True'
-        }])
+        logger.info("Creating an instance using the following parameters: %s.", str(instance_params))
+
+        awssocks_instance = _ec2.create_instances(**instance_params, MinCount=1, MaxCount=1, InstanceInitiatedShutdownBehavior='terminate')[0]
+        awssocks_instance.create_tags(Tags=[
+            {
+                'Key': 'AWSSOCKS__MANAGED',
+                'Value': 'True'
+            },
+            {
+                'Key': 'AWSSOCKS__AUTO_TERMINATION_AFTER_MINUTES',
+                'Value': str(terminate_instance_after_minutes)
+            }                                
+        ])
         logger.info("The instance %s has been successfully created.", awssocks_instance.id)
         logger.info("Please wait while the newly created instance is starting up and becoming operational.")
         awssocks_instance.wait_until_running()
@@ -59,7 +75,6 @@ def awssocks_create_instance(
         raise
     else:
         return awssocks_instance
-
 
 def awssocks_terminate_instance(instance_id):
     """

@@ -26,7 +26,8 @@ def start():
         image_id=image_id,
         instance_type=AWSSOCKS_EC2_INSTANCE_SIZE,
         key_name=key_name,
-        security_group_ids=[security_group])
+        security_group_ids=[security_group],
+        terminate_instance_after_minutes=AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES)
 
     public_ip = awssocks_instance_ip_address(awssocks_instance.id)
     state = awssocks_instance_state(awssocks_instance.id)
