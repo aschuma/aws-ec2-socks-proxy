@@ -96,7 +96,7 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
 
 ### Stop
 
-                                                                3.11.2  21:29:20
+        
         ❯ ./STOP.py 
         21:31:33,806 INFO: Found credentials in shared credentials file: ~/.aws/credentials
         21:31:34,140 INFO: ==========================================
