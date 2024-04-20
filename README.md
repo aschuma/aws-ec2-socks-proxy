@@ -53,11 +53,11 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
 ### Start
 
         ❯ ./START.py 
-        2024-04-20 21:26:44,320 INFO: Found credentials in shared credentials file: ~/.aws/credentials
-        2024-04-20 21:26:44,699 INFO: ==========================================
-        2024-04-20 21:26:44,699 INFO: STARTING
-        2024-04-20 21:26:44,699 INFO: ------------------------------------------
-        2024-04-20 21:26:44,699 INFO: 
+        21:26:44,320 INFO: Found credentials in shared credentials file: ~/.aws/credentials
+        21:26:44,699 INFO: ==========================================
+        21:26:44,699 INFO: STARTING
+        21:26:44,699 INFO: ------------------------------------------
+        21:26:44,699 INFO: 
             
                                     AWSSOCKS_KEY = id_rsa__aws_aschuma-std
                                  AWSSOCKS_REGION = eu-west-2
@@ -67,42 +67,42 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
          AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES = 180 (BETA feature)
             
             
-        2024-04-20 21:26:44,699 INFO: Instances that have the tag AWSSOCKS__MANAGED set to True:
-        2024-04-20 21:26:45,310 INFO: Found an Amazon Machine Image (AMI) that includes Amazon Linux 2, an x64 architecture, and a general-purpose EBS volume: {'Name': '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2', 'Type': 'String', 'Value': 'ami-0d3718d9421324fb3', 'Version': 111, 'LastModifiedDate': datetime.datetime(2024, 4, 19, 0, 49, 24, 883000, tzinfo=tzlocal()), 'ARN': 'arn:aws:ssm:eu-west-2::parameter/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2', 'DataType': 'text'}
-        2024-04-20 21:26:45,310 INFO: Verifying the configuration of the security group AWSSOCKS_SG.
-        2024-04-20 21:26:45,644 INFO: Creating a security group named AWSSOCKS_SG.
-        2024-04-20 21:26:46,353 INFO: The security group AWSSOCKS_SG has been successfully created.
-        2024-04-20 21:26:46,661 INFO: The verification of the security group AWSSOCKS_SG configuration has been completed (sg-0ef89a67d14979626)
-        2024-04-20 21:26:46,661 INFO: Verifying the configuration of the public key id_rsa__aws_aschuma-std.
-        2024-04-20 21:26:46,965 INFO: Uploading the key file /Users/aschuma/.ssh/id_rsa__aws_aschuma-std.pub to AWS AWSSOCKS_KEY.
-        2024-04-20 21:26:47,133 INFO: The key file /Users/aschuma/.ssh/id_rsa__aws_aschuma-std.pub has been successfully uploaded (ec2.KeyPairInfo(name='AWSSOCKS_KEY')).
-        2024-04-20 21:26:47,208 INFO: The key AWSSOCKS_KEY with fingerprint 97:a0:42:36:4b:2b:d2:01:9e:36:43:da:d0:af:9e:08 has been found.
-        2024-04-20 21:26:47,209 INFO: The verification of the public key id_rsa__aws_aschuma-std configuration has been completed (AWSSOCKS_KEY)
-        2024-04-20 21:26:47,209 INFO: Creating an instance using the following parameters: {'ImageId': 'ami-0d3718d9421324fb3', 'InstanceType': 't2.nano', 'KeyName': 'AWSSOCKS_KEY', 'UserData': '#!/bin/bash\n nohup shutdown -h +180 & \n', 'SecurityGroupIds': ['sg-0ef89a67d14979626']}.
-        2024-04-20 21:26:48,709 INFO: The instance i-00a09f6a53325facb has been successfully created.
-        2024-04-20 21:26:48,710 INFO: Please wait while the newly created instance is starting up and becoming operational.
-        2024-04-20 21:27:19,453 INFO: The newly created instance i-00a09f6a53325facb is now fully operational and ready for use.
-        2024-04-20 21:27:19,570 INFO: The IP address for i-00a09f6a53325facb is 3.8.175.31.
-        2024-04-20 21:27:19,688 INFO: The State for i-00a09f6a53325facb is running.
-        2024-04-20 21:27:19,689 INFO: Summary:
-        2024-04-20 21:27:19,689 INFO:  - instance id is  i-00a09f6a53325facb
-        2024-04-20 21:27:19,689 INFO:  - public ip is 3.8.175.31
-        2024-04-20 21:27:19,689 INFO:  - state is running
-        2024-04-20 21:27:19,689 INFO: ------------------------------------------
-        2024-04-20 21:27:19,689 INFO: STARTED
-        2024-04-20 21:27:19,689 INFO: ------------------------------------------
-        2024-04-20 21:27:19,689 INFO: Ready to create an ssh socks tunnel. Please execute the following command on the command line:
-        2024-04-20 21:27:19,689 INFO:     ssh -o "StrictHostKeyChecking no" -C -N  -i ~/.ssh/id_rsa__aws_aschuma-std  ec2-user@3.8.175.31 -D 4444
+        21:26:44,699 INFO: Instances that have the tag AWSSOCKS__MANAGED set to True:
+        21:26:45,310 INFO: Found an Amazon Machine Image (AMI) that includes Amazon Linux 2, an x64 architecture, and a general-purpose EBS volume: {'Name': '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2', 'Type': 'String', 'Value': 'ami-0d3718d9421324fb3', 'Version': 111, 'LastModifiedDate': datetime.datetime(2024, 4, 19, 0, 49, 24, 883000, tzinfo=tzlocal()), 'ARN': 'arn:aws:ssm:eu-west-2::parameter/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2', 'DataType': 'text'}
+        21:26:45,310 INFO: Verifying the configuration of the security group AWSSOCKS_SG.
+        21:26:45,644 INFO: Creating a security group named AWSSOCKS_SG.
+        21:26:46,353 INFO: The security group AWSSOCKS_SG has been successfully created.
+        21:26:46,661 INFO: The verification of the security group AWSSOCKS_SG configuration has been completed (sg-0ef89a67d14979626)
+        21:26:46,661 INFO: Verifying the configuration of the public key id_rsa__aws_aschuma-std.
+        21:26:46,965 INFO: Uploading the key file /Users/aschuma/.ssh/id_rsa__aws_aschuma-std.pub to AWS AWSSOCKS_KEY.
+        21:26:47,133 INFO: The key file /Users/aschuma/.ssh/id_rsa__aws_aschuma-std.pub has been successfully uploaded (ec2.KeyPairInfo(name='AWSSOCKS_KEY')).
+        21:26:47,208 INFO: The key AWSSOCKS_KEY with fingerprint 97:a0:42:36:4b:2b:d2:01:9e:36:43:da:d0:af:9e:08 has been found.
+        21:26:47,209 INFO: The verification of the public key id_rsa__aws_aschuma-std configuration has been completed (AWSSOCKS_KEY)
+        21:26:47,209 INFO: Creating an instance using the following parameters: {'ImageId': 'ami-0d3718d9421324fb3', 'InstanceType': 't2.nano', 'KeyName': 'AWSSOCKS_KEY', 'UserData': '#!/bin/bash\n nohup shutdown -h +180 & \n', 'SecurityGroupIds': ['sg-0ef89a67d14979626']}.
+        21:26:48,709 INFO: The instance i-00a09f6a53325facb has been successfully created.
+        21:26:48,710 INFO: Please wait while the newly created instance is starting up and becoming operational.
+        21:27:19,453 INFO: The newly created instance i-00a09f6a53325facb is now fully operational and ready for use.
+        21:27:19,570 INFO: The IP address for i-00a09f6a53325facb is 3.8.175.31.
+        21:27:19,688 INFO: The State for i-00a09f6a53325facb is running.
+        21:27:19,689 INFO: Summary:
+        21:27:19,689 INFO:  - instance id is  i-00a09f6a53325facb
+        21:27:19,689 INFO:  - public ip is 3.8.175.31
+        21:27:19,689 INFO:  - state is running
+        21:27:19,689 INFO: ------------------------------------------
+        21:27:19,689 INFO: STARTED
+        21:27:19,689 INFO: ------------------------------------------
+        21:27:19,689 INFO: Ready to create an ssh socks tunnel. Please execute the following command on the command line:
+        21:27:19,689 INFO:     ssh -o "StrictHostKeyChecking no" -C -N  -i ~/.ssh/id_rsa__aws_aschuma-std  ec2-user@3.8.175.31 -D 4444
 
 ### Stop
 
                                                                 3.11.2  21:29:20
         ❯ ./STOP.py 
-        2024-04-20 21:31:33,806 INFO: Found credentials in shared credentials file: ~/.aws/credentials
-        2024-04-20 21:31:34,140 INFO: ==========================================
-        2024-04-20 21:31:34,140 INFO: STOPPING
-        2024-04-20 21:31:34,140 INFO: ------------------------------------------
-        2024-04-20 21:31:34,141 INFO: 
+        21:31:33,806 INFO: Found credentials in shared credentials file: ~/.aws/credentials
+        21:31:34,140 INFO: ==========================================
+        21:31:34,140 INFO: STOPPING
+        21:31:34,140 INFO: ------------------------------------------
+        21:31:34,141 INFO: 
             
                                     AWSSOCKS_KEY = id_rsa__aws_aschuma-std
                                  AWSSOCKS_REGION = eu-west-2
@@ -112,28 +112,28 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
          AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES = 180 (BETA feature)
             
             
-        2024-04-20 21:31:34,141 INFO: Instances that have the tag AWSSOCKS__MANAGED set to True:
-        2024-04-20 21:31:34,592 INFO:   - i-00a09f6a53325facb 3.8.175.31 running
-        2024-04-20 21:31:34,824 INFO: The instance i-00a09f6a53325facb is being terminated.
-        2024-04-20 21:31:35,326 INFO: Please wait until the termination of instance i-00a09f6a53325facb has been completed.
-        2024-04-20 21:32:20,998 INFO: The instance i-00a09f6a53325facb has been successfully terminated.
-        2024-04-20 21:32:21,224 INFO: The key AWSSOCKS_KEY with fingerprint 97:a0:42:36:4b:2b:d2:01:9e:36:43:da:d0:af:9e:08 has been found.
-        2024-04-20 21:32:21,224 INFO: Deleting the key AWSSOCKS_KEY.
-        2024-04-20 21:32:21,388 INFO: The key AWSSOCKS_KEY has been successfully deleted.
-        2024-04-20 21:32:21,924 INFO: Deleting security group AWSSOCKS_SG.
-        2024-04-20 21:32:22,326 INFO: The security group sg-0ef89a67d14979626 has been successfully deleted.
-        2024-04-20 21:32:22,326 INFO: ------------------------------------------
-        2024-04-20 21:32:22,326 INFO: STOPPED
-        2024-04-20 21:32:22,326 INFO: ------------------------------------------
+        21:31:34,141 INFO: Instances that have the tag AWSSOCKS__MANAGED set to True:
+        21:31:34,592 INFO:   - i-00a09f6a53325facb 3.8.175.31 running
+        21:31:34,824 INFO: The instance i-00a09f6a53325facb is being terminated.
+        21:31:35,326 INFO: Please wait until the termination of instance i-00a09f6a53325facb has been completed.
+        21:32:20,998 INFO: The instance i-00a09f6a53325facb has been successfully terminated.
+        21:32:21,224 INFO: The key AWSSOCKS_KEY with fingerprint 97:a0:42:36:4b:2b:d2:01:9e:36:43:da:d0:af:9e:08 has been found.
+        21:32:21,224 INFO: Deleting the key AWSSOCKS_KEY.
+        21:32:21,388 INFO: The key AWSSOCKS_KEY has been successfully deleted.
+        21:32:21,924 INFO: Deleting security group AWSSOCKS_SG.
+        21:32:22,326 INFO: The security group sg-0ef89a67d14979626 has been successfully deleted.
+        21:32:22,326 INFO: ------------------------------------------
+        21:32:22,326 INFO: STOPPED
+        21:32:22,326 INFO: ------------------------------------------
 
 ### Status
 
         ❯ ./STATUS.py
-        2024-04-20 21:40:42,777 INFO: Found credentials in shared credentials file: ~/.aws/credentials
-        2024-04-20 21:40:43,164 INFO: ==========================================
-        2024-04-20 21:40:43,164 INFO: STATUS
-        2024-04-20 21:40:43,164 INFO: ------------------------------------------
-        2024-04-20 21:40:43,165 INFO: 
+        21:40:42,777 INFO: Found credentials in shared credentials file: ~/.aws/credentials
+        21:40:43,164 INFO: ==========================================
+        21:40:43,164 INFO: STATUS
+        21:40:43,164 INFO: ------------------------------------------
+        21:40:43,165 INFO: 
             
                                     AWSSOCKS_KEY = id_rsa__aws_aschuma-std
                                  AWSSOCKS_REGION = eu-west-2
@@ -143,13 +143,13 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
          AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES = 180 (BETA feature)
             
             
-        2024-04-20 21:40:43,165 INFO: Instances that have the tag AWSSOCKS__MANAGED set to True:
-        2024-04-20 21:40:43,566 INFO:   - i-00a09f6a53325facb None terminated
-        2024-04-20 21:40:44,206 INFO: Installed security group: None
-        2024-04-20 21:40:44,444 INFO: Installed public key: None
-        2024-04-20 21:40:44,444 INFO: ------------------------------------------
-        2024-04-20 21:40:44,444 INFO: STATUS
-        2024-04-20 21:40:44,444 INFO: ------------------------------------------        
+        21:40:43,165 INFO: Instances that have the tag AWSSOCKS__MANAGED set to True:
+        21:40:43,566 INFO:   - i-00a09f6a53325facb None terminated
+        21:40:44,206 INFO: Installed security group: None
+        21:40:44,444 INFO: Installed public key: None
+        21:40:44,444 INFO: ------------------------------------------
+        21:40:44,444 INFO: STATUS
+        21:40:44,444 INFO: ------------------------------------------        
 
 ## Links
 
