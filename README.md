@@ -41,7 +41,7 @@ intended destination.
 If the SSH server is located in a region that is not subject to GeoIP-restrictions, third parties will be unable to
 monitor your traffic or restrict access to websites because they will not know the true location of your browser
 
-And that's where AWS EC2 comes in:
+This is where AWS EC2 comes into play. The script offered by this repository embodies this fundamental concept:
 
 * Set up an EC2 instance on AWS in the region where you wish to access GeoIP protected content.
 * Establish a secure SSH tunnel from your local machine to the EC2 instance, forwarding traffic on port 4444. The
