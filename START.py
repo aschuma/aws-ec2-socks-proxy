@@ -21,13 +21,17 @@ def start():
     image_id = awssocks_ami_image()
     security_group = init_awssocks_security_group()
     key_name = init_awssocks_public_key()
+    
+    ttl = None
+    if 'AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES' in locals() or 'AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES' in globals():
+        ttl = AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES
 
     awssocks_instance = awssocks_create_instance(
         image_id=image_id,
         instance_type=AWSSOCKS_EC2_INSTANCE_SIZE,
         key_name=key_name,
         security_group_ids=[security_group],
-        terminate_instance_after_minutes=AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES)
+        terminate_instance_after_minutes=ttl)
 
     public_ip = awssocks_instance_ip_address(awssocks_instance.id)
     state = awssocks_instance_state(awssocks_instance.id)
