@@ -23,6 +23,7 @@ code may result in charges to your AWS account.***
 To proceed, you need an AWS account and must have your default credentials configured as described in
 the [AWS Tools and SDKs Shared Configuration and
 Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/creds-config-files.html).
+Please consult also [Specify which AWS Regions your account can use](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html)
 
 You will need an SSH key. To generate one, use the `ssh-keygen` command. You can easily find a tutorial online to learn
 how to use it.
@@ -154,5 +155,6 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
 ## Links
 
 * AWS account creation: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/
+* AWS manage entitled regions: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
 * AWS CLI setup: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 * Some boto3 Python examples: https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python
