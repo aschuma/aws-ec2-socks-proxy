@@ -1,6 +1,6 @@
 # SOCKSv5 proxy using an AWS EC2 instance as relay server
 
-⚠️ Please note that additional entries have been added to the configuration resource env.py_template. Therefore, it is recommended to redo the configuration step.
+⚠️ Please note that additional entries have been added to the configuration resource `env.py_template`. Therefore, it is recommended to redo the configuration step.
 
 ## Content of this repository
 
