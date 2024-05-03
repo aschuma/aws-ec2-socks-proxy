@@ -11,11 +11,14 @@ _ssm = boto3.client('ssm', AWSSOCKS_REGION)
 
 def awssocks_ami_image():
     try:
-        ami_params = _ssm.get_parameters_by_path(
-            Path='/aws/service/ami-amazon-linux-latest')
-        amzn2_amis = [ap for ap in ami_params['Parameters'] if
+        ami_paginator = _ssm.get_paginator("get_parameters_by_path")
+        ami_params = []
+        for page in ami_paginator.paginate(Path="/aws/service/ami-amazon-linux-latest"):
+            ami_params += page["Parameters"]
+
+        amzn2_amis = [ap for ap in ami_params if
                       all(query in ap['Name'] for query
-                          in ('amzn2', 'x86_64', 'gp2'))]
+                          in ('amzn2', AWSSOCKS_EC2_ARCHITECTURE, 'gp2'))]
         if len(amzn2_amis) > 0:
             ami_image_id = amzn2_amis[0]['Value']
             logger.info("Found an Amazon Machine Image (AMI) that includes Amazon Linux 2, "
