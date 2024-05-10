@@ -26,7 +26,7 @@ def awssocks_ami_image():
                         str(amzn2_amis[0]))
             return ami_image_id
         elif len(ami_params) > 0:
-            ami_image_id = ami_params['Parameters'][0]['Value']
+            ami_image_id = ami_params[0]['Value']
             logger.info("Found an Amazon Machine Image (AMI) to use for the proxy: %s",
                         str(ami_params[0]))
             return ami_image_id

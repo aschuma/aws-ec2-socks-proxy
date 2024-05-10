@@ -99,7 +99,6 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
 
 ### Stop
 
-        
         ❯ ./STOP.py 
         21:31:33,806 INFO: Found credentials in shared credentials file: ~/.aws/credentials
         21:31:34,140 INFO: ==========================================
@@ -153,6 +152,11 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
         21:40:44,444 INFO: ------------------------------------------
         21:40:44,444 INFO: STATUS
         21:40:44,444 INFO: ------------------------------------------        
+
+## Troubleshooting
+
+If you encounter an error message such as `Couldn't create instance with image ami-<id>>, instance type t3.nano, and key AWSSOCKS_KEY` it may be due to the unavailability of `t3.nano` instances in the selected region. Please consider modifying the instance size to `awssocks_ec2_instance_size = t2.nano` in the config.ini file.
+
 
 ## Links
 
