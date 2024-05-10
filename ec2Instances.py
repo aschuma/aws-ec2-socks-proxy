@@ -37,7 +37,7 @@ def awssocks_create_instance(
                                              the instance after the given time.
     :return: The newly created instance.
     """
-    try:        
+    try:
         instance_params = {
             'ImageId': image_id, 'InstanceType': instance_type, 'KeyName': key_name
         }
@@ -49,9 +49,11 @@ def awssocks_create_instance(
         if security_group_ids is not None:
             instance_params['SecurityGroupIds'] = security_group_ids
 
-        logger.info("Creating an instance using the following parameters: %s.", str(instance_params))
+        logger.info("Creating an instance using the following parameters: %s.", str(
+            instance_params))
 
-        awssocks_instance = _ec2.create_instances(**instance_params, MinCount=1, MaxCount=1, InstanceInitiatedShutdownBehavior='terminate')[0]
+        awssocks_instance = _ec2.create_instances(
+            **instance_params, MinCount=1, MaxCount=1, InstanceInitiatedShutdownBehavior='terminate')[0]
         awssocks_instance.create_tags(Tags=[
             {
                 'Key': 'AWSSOCKS__MANAGED',
@@ -60,10 +62,12 @@ def awssocks_create_instance(
             {
                 'Key': 'AWSSOCKS__AUTO_TERMINATION_AFTER_MINUTES',
                 'Value': str(terminate_instance_after_minutes)
-            }                                
+            }
         ])
-        logger.info("The instance %s has been successfully created.", awssocks_instance.id)
-        logger.info("Please wait while the newly created instance is starting up and becoming operational.")
+        logger.info("The instance %s has been successfully created.",
+                    awssocks_instance.id)
+        logger.info(
+            "Please wait while the newly created instance is starting up and becoming operational.")
         awssocks_instance.wait_until_running()
         awssocks_instance.load()
         logger.info("The newly created instance %s is now fully operational and ready for use.",
@@ -75,6 +79,7 @@ def awssocks_create_instance(
         raise
     else:
         return awssocks_instance
+
 
 def awssocks_terminate_instance(instance_id):
     """
@@ -89,10 +94,12 @@ def awssocks_terminate_instance(instance_id):
         if instance.state["Name"] != 'terminated':
             logger.info("The instance %s is being terminated.", instance_id)
             instance.terminate()
-            logger.info("Please wait until the termination of instance %s has been completed.", instance_id)
+            logger.info(
+                "Please wait until the termination of instance %s has been completed.", instance_id)
             instance.load()
             instance.wait_until_terminated()
-            logger.info("The instance %s has been successfully terminated.", instance_id)
+            logger.info(
+                "The instance %s has been successfully terminated.", instance_id)
     except ClientError:
         logger.exception("Couldn't terminate instance %s.", instance_id)
         raise
@@ -100,7 +107,7 @@ def awssocks_terminate_instance(instance_id):
 
 def list_awssocks_instances():
     try:
-        awssocks_instance_list = _ec2.instances.filter(
+        awssocks_instance_list_raw = _ec2.instances.filter(
             Filters=[
                 {
                     'Name': 'tag:AWSSOCKS__MANAGED',
@@ -110,13 +117,16 @@ def list_awssocks_instances():
                 }
             ]
         )
-        logger.info(f'Instances that have the tag AWSSOCKS__MANAGED set to True:')
-        if awssocks_instance_list:
+        awssocks_instance_list = [
+            instance for instance in awssocks_instance_list_raw]
+        logger.info(
+            f'Instances that have the tag AWSSOCKS__MANAGED set to True:')
+        if len(awssocks_instance_list) > 0:
             for awssocks_instance in awssocks_instance_list:
                 logger.info(
                     f'  - {awssocks_instance.id} {awssocks_instance.public_ip_address} {awssocks_instance.state["Name"]}')
         else:
-            logger.info(f'  - none ')
+            logger.info(f'  N/A ')
 
         return [awssocks_instance.id for awssocks_instance in awssocks_instance_list]
     except ClientError:
@@ -126,7 +136,7 @@ def list_awssocks_instances():
 
 def list_awssocks_running_instances():
     try:
-        awssocks_instance_list = _ec2.instances.filter(
+        awssocks_instance_list_raw = _ec2.instances.filter(
             Filters=[
                 {
                     'Name': 'tag:AWSSOCKS__MANAGED',
@@ -142,13 +152,16 @@ def list_awssocks_running_instances():
                 }
             ]
         )
-        logger.info(f'Running instances that have the tag AWSSOCKS__MANAGED set to True:')
-        if awssocks_instance_list:
+        awssocks_instance_list = [
+            instance for instance in awssocks_instance_list_raw]
+        logger.info(
+            f'Running instances that have the tag AWSSOCKS__MANAGED set to True:')
+        if len(awssocks_instance_list) > 0:
             for awssocks_instance in awssocks_instance_list:
                 logger.info(
                     f'  - {awssocks_instance.id} {awssocks_instance.public_ip_address} {awssocks_instance.state["Name"]}')
         else:
-            logger.info(f'  - none ')
+            logger.info(f'  N/A ')
         return [awssocks_instance.id for awssocks_instance in awssocks_instance_list]
     except ClientError:
         logger.exception("Couldn't lookup instances.")
