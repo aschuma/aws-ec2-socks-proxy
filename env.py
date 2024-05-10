@@ -23,7 +23,7 @@ def log_configuration():
                             AWSSOCKS_KEY = {}
                          AWSSOCKS_REGION = {}
               AWSSOCKS_EC2_INSTANCE_SIZE = {}
-               AWSSOCKS_EC2_ARCHITECTURE = {}
+               AWSSOCKS_EC2_ARCHITECTURE = {} (preferred)
                        AWSSOCKS_KEY_NAME = {}
             AWSSOCKS_SECURITY_GROUP_NAME = {}
  AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES = {} (BETA feature)
