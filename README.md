@@ -1,6 +1,6 @@
 # SOCKSv5 proxy using an AWS EC2 instance as relay server
 
-⚠️ Please note that additional entries have been appended to the configuration resource `env.py_template`. Therefore, it is advisable to repeat the configuration step in case you initiate a `git pull`.
+⚠️ Please note that the configuration has changed. Therefore, it is advisable to repeat the configuration steps in case you initiate a `git pull`.
 
 ## Content of this repository
 
@@ -38,7 +38,7 @@ The steps to use this repository are as follows:
 
 * Clone the project
 * Change directory into the cloned project by using the `cd` command.
-* Copy `env.py_template` to `env.py` and update the values for the SSH key name and AWS region in the newly created
+* Copy `config.ini_template` to `config.ini` and update the values for the SSH key name and AWS region in the newly created
   file.
 * Create a virtual Python environment: `python3 -m venv venv`.
 * Activate the environment: `source venv/bin/activate`

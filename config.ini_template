@@ -1,0 +1,27 @@
+# Environment Configuration
+
+[awssocks]
+# the name of the key in ~/.ssh/ e.g. "id_rsa"
+awssocks_key = id_rsa
+
+# the aws region, e.g for UK
+awssocks_region = eu-west-2
+
+# the ec2 instance size - nano should be sufficient
+awssocks_ec2_instance_size = t3.nano
+
+# the ec2 architecture - "x86_64" or "amd64"
+awssocks_ec2_architecture = x86_64
+
+# the name of public key - the key will be managed by the scripts, so do not use an existing one
+awssocks_key_name = AWSSOCKS_KEY
+
+# the name of security group  - the security group will be managed by the scripts, so do not use an existing one
+awssocks_security_group_name = AWSSOCKS_SG
+
+# the duration in minutes after which the EC2 instance will terminate itself automatically;
+# if the value is set to 0 or a negative number, the instance will not auto-terminate and 
+# will require manual intervention for termination.
+# 
+# This is a BETA feature and should be used with caution.
+awssocks_auto_termination_after_minutes = -1
