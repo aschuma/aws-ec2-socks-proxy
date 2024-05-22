@@ -49,7 +49,7 @@ The steps to use this repository are as follows:
 
 You can now browse the web in your selected region without GeoIP restrictions.
 
-To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, you have the option to set a time-to-live value in the _env.py_ file. When configured, the instance will automatically terminate itself after the specified period has elapsed (BETA feature).
+To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, you have the option to set a time-to-live value in the `config.ini` file. When configured, the instance will automatically terminate itself after the specified period has elapsed (BETA feature).
 
 ## Example script output
 
