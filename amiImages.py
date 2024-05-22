@@ -21,7 +21,7 @@ def awssocks_ami_image():
                                    in ('amzn2', 'gp2'))]
 
         amzn2_amis = [ap for ap in amzn2_amis_any_arch if
-                      ap['Name'] in AWSSOCKS_EC2_ARCHITECTURE]
+                      AWSSOCKS_EC2_ARCHITECTURE in ap['Name']]
 
         if len(amzn2_amis) > 0:
             ami_image_id = amzn2_amis[0]['Value']
