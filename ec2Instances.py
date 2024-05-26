@@ -11,36 +11,10 @@ _ec2 = boto3.resource('ec2', region_name=AWSSOCKS_REGION)
 
 
 def awssocks_create_instance(
-        image_id, instance_type, key_name, security_group_ids=None, terminate_instance_after_minutes=None):
-    """
-    Creates a new Amazon EC2 instance. The instance automatically starts immediately after
-    it is created.
-
-    The instance is created in the default VPC of the current account.
-
-    :param image_id: The Amazon Machine Image (AMI) that defines the kind of
-                     instance to create. The AMI defines things like the kind of
-                     operating system, such as Amazon Linux, and how the instance is
-                     stored, such as Elastic Block Storage (EBS).
-    :param instance_type: The type of instance to create, such as 't2.micro'.
-                          The instance type defines things like the number of CPUs and
-                          the amount of memory.
-    :param key_name: The name of the key pair that is used to secure connections to
-                     the instance.
-    :param security_group_ids: A list of security groups ids that are used to grant
-                                 access to the instance. When no security groups are
-                                 specified, the default security group of the VPC
-                                 is used.
-    :param terminate_instance_after_minutes: The number of minutes after which the instance
-                                             should terminate itself. If set to a non-negative
-                                             value, a userdata fragment will be added to shutdown
-                                             the instance after the given time.
-    :return: The newly created instance.
-    """
+        image_id, instance_type_list, key_name, security_group_ids=None, terminate_instance_after_minutes=None):
     try:
-        instance_params = {
-            'ImageId': image_id, 'InstanceType': instance_type, 'KeyName': key_name
-        }
+
+        instance_params = {'ImageId': image_id, 'KeyName': key_name}
 
         if terminate_instance_after_minutes is not None and terminate_instance_after_minutes >= 0:
             userdata = f"#!/bin/bash\n nohup shutdown -h +{terminate_instance_after_minutes} & \n"
@@ -49,11 +23,20 @@ def awssocks_create_instance(
         if security_group_ids is not None:
             instance_params['SecurityGroupIds'] = security_group_ids
 
-        logger.info("Creating an instance using the following parameters: %s.", str(
-            instance_params))
+        def create_instance(instance_size):
+            try:
+                logger.info("Trying %s to create an instance. Using the following parameters: %s.",
+                            instance_size, str(instance_params))
+                return _ec2.create_instances(**instance_params, InstanceType=instance_size, MinCount=1, MaxCount=1, InstanceInitiatedShutdownBehavior='terminate')[0]
+            except ClientError as e:
+                logger.info("Could not create an instance using %s. The instance type %s might not be available in the region %s.",
+                            instance_size, instance_size, AWSSOCKS_REGION)
+                raise e
 
-        awssocks_instance = _ec2.create_instances(
-            **instance_params, MinCount=1, MaxCount=1, InstanceInitiatedShutdownBehavior='terminate')[0]
+        logger.info(
+            "Trying to create an instance with one of the following sizes: %s. In case an instance type is not available, the next one will be tried.", ', '.join(instance_type_list))
+
+        awssocks_instance = _call_function(create_instance, instance_type_list)
         awssocks_instance.create_tags(Tags=[
             {
                 'Key': 'AWSSOCKS__MANAGED',
@@ -72,22 +55,16 @@ def awssocks_create_instance(
         awssocks_instance.load()
         logger.info("The newly created instance %s is now fully operational and ready for use.",
                     awssocks_instance.id)
-    except ClientError:
-        logger.exception(
-            "Couldn't create instance with image %s, instance type %s, and key %s.",
-            image_id, instance_type, key_name)
-        raise
+    except ClientError as e:
+        logger.info(
+            "An error occurred while creating the instance using instance size %s, image %s, and key %s.",
+            image_id, str(instance_type_list), key_name)
+        raise e
     else:
         return awssocks_instance
 
 
 def awssocks_terminate_instance(instance_id):
-    """
-    Terminates an instance. The request returns immediately. To wait for the
-    instance to terminate, use Instance.wait_until_terminated().
-
-    :param instance_id: The ID of the instance to terminate.
-    """
     try:
         instance = _ec2.Instance(instance_id)
         instance.load()
@@ -180,3 +157,19 @@ def awssocks_instance_state(instance_id):
     state = instance.state["Name"]
     logger.info("The State for %s is %s.", instance_id, state)
     return state
+
+
+def _call_function(function, function_parameter_candidate_list):
+    last_exception = None
+
+    for param in function_parameter_candidate_list:
+        try:
+            return function(param)
+        except Exception as e:
+            last_exception = e
+
+    if last_exception:
+        raise last_exception
+    else:
+        raise ValueError(
+            "The parameter list is empty, no function call was attempted.")
