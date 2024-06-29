@@ -7,7 +7,18 @@ logger = logger_factory(__name__)
 
 # Read configuration from file
 config = configparser.ConfigParser()
-config.read('config.ini')
+
+primary_config_path = 'current-config.ini'
+fallback_config_path = 'config.ini'
+
+if os.path.exists(primary_config_path):
+    # Attempt to read the primary configuration file
+    config.read(primary_config_path)
+    logger.info(f"Configuration loaded from {primary_config_path}")
+else:
+    # Fallback to the secondary configuration file if the primary is not found
+    config.read(fallback_config_path)
+    logger.info(f"{primary_config_path} not found. Configuration loaded from {fallback_config_path}")
 
 # Retrieve values with defaults from environemnt or config.ini, respecting environment variables
 AWSSOCKS_KEY = os.getenv('AWSSOCKS_KEY', config.get('awssocks', 'awssocks_key', fallback="my-whatever_rsa-key"))
