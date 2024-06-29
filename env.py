@@ -22,7 +22,7 @@ def log_configuration():
     logger.info("""
                             AWSSOCKS_KEY = {}
                          AWSSOCKS_REGION = {}
-              AWSSOCKS_EC2_INSTANCE_SIZE = {}
+              AWSSOCKS_EC2_INSTANCE_SIZE = {} (candidates)
                AWSSOCKS_EC2_ARCHITECTURE = {} (preferred)
                        AWSSOCKS_KEY_NAME = {}
             AWSSOCKS_SECURITY_GROUP_NAME = {}
