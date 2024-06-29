@@ -25,3 +25,6 @@ awssocks_security_group_name = AWSSOCKS_SG
 # 
 # This is a BETA feature and should be used with caution.
 awssocks_auto_termination_after_minutes = -1
+
+# 
+awssocks_local_ssh_port = 4444
