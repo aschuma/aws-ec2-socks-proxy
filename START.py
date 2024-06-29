@@ -21,13 +21,15 @@ def start():
     image_id = awssocks_ami_image()
     security_group = init_awssocks_security_group()
     key_name = init_awssocks_public_key()
-    
+    instance_type_list = [type.strip()
+                          for type in AWSSOCKS_EC2_INSTANCE_SIZE.split(',')]
     awssocks_instance = awssocks_create_instance(
         image_id=image_id,
-        instance_type=AWSSOCKS_EC2_INSTANCE_SIZE,
+        instance_type_list=instance_type_list,
         key_name=key_name,
         security_group_ids=[security_group],
-        terminate_instance_after_minutes=AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES)
+        terminate_instance_after_minutes=AWSSOCKS_AUTO_TERMINATION_AFTER_MINUTES
+    )
 
     public_ip = awssocks_instance_ip_address(awssocks_instance.id)
     state = awssocks_instance_state(awssocks_instance.id)
@@ -40,7 +42,8 @@ def start():
     logger.info('-' * 42)
     logger.info("STARTED")
     logger.info('-' * 42)
-    logger.info("Ready to create an ssh socks tunnel. Please execute the following command on the command line:")
+    logger.info(
+        "Ready to create an ssh socks tunnel. Please execute the following command on the command line:")
     logger.info("    ssh -o \"StrictHostKeyChecking no\" -C -N  -i ~/.ssh/%s  ec2-user@%s -D 4444",
                 AWSSOCKS_KEY,
                 public_ip)
