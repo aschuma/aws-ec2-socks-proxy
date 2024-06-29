@@ -1,2 +1,4 @@
 config.ini
+current-config.ini
+configs/*
 __pycache__
