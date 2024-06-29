@@ -71,7 +71,7 @@ def main(config_dir, symlink_path):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Manage configuration files via symlink.")
     parser.add_argument('--config-dir', type=str, default='configs', help="Directory containing configuration files.")
-    parser.add_argument('--symlink-path', type=str, default='config-current.ini', help="Path to the symlink.")
+    parser.add_argument('--symlink-path', type=str, default='current-config.ini', help="Path to the symlink.")
     args = parser.parse_args()
 
     main(args.config_dir, args.symlink_path)
