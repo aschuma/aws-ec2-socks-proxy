@@ -153,6 +153,45 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
         21:40:44,444 INFO: STATUS
         21:40:44,444 INFO: ------------------------------------------        
 
+## Helper Scripts
+
+### Configuration Manager
+
+This script is a configuration manager designed to handle multiple configuration files. The available configuration files should be stored in a directory called `configs`. The script allows you to list these configurations, select one, and create a symbolic link named `current-config.ini` that points to the selected configuration file.
+
+#### Key Features:
+
+* **List Configurations**: Displays all available `.ini` configuration files in the `configs` directory.
+* **Current Configuration**: Shows which configuration file is currently linked.
+* **Select and Update**: Allows the user to select a configuration file and updates the symlink to point to the new configuration.
+
+#### Usage:
+
+Run the script directly to manage the configurations.
+
+```bash
+./CM.py
+```
+
+
+### SSH Tunnel Starter
+
+This script is a utility designed to start an SSH tunnel, acting as a wrapper around the `ssh` command. It uses the IP address of the started EC2 instance and the SSH key specified in the configuration file to establish the tunnel (The script has been tested exclusively on macOS).
+
+#### Key Features:
+
+* **Check Instance Status**: Connects to AWS to find running EC2 instances tagged for use with this script.
+* **Start SSH Tunnel**: Initiates an SSH tunnel to the selected EC2 instance using the specified SSH key.
+* **Graceful Shutdown**: Handles termination signals to close the SSH tunnel gracefully.
+
+#### Usage:
+
+Run the script directly to start the SSH tunnel. It will automatically fetch the necessary details such as the instance's IP address and the SSH key from environment variables.
+
+```bash
+./ssh_tunnel_manager.py
+```
+
 ## Links
 
 * AWS account creation: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/
