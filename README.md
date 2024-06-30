@@ -189,7 +189,7 @@ This script is a utility designed to start an SSH tunnel, acting as a wrapper ar
 Run the script directly to start the SSH tunnel. It will automatically fetch the necessary details such as the instance's IP address and the SSH key from environment variables.
 
 ```bash
-./ssh_tunnel_manager.py
+./SSH.py
 ```
 
 ## Links
