@@ -155,6 +155,10 @@ To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, y
 
 ## Helper Scripts
 
+The following scripts are optional helper scripts. Only `./START.py`, `./STOP.py`, and `./STATUS.py`, mentioned above, are necessary for starting, stopping, and checking the status of the AWS EC2 infrastructure.
+
+The subsequent helper scripts provide additional functionality and may or may not be compatible with your operating system. They have been tested only on macOS.
+
 ### Configuration Manager
 
 This script is a configuration manager designed to handle multiple configuration files. The available configuration files should be stored in a directory called `configs`. The script allows you to list these configurations, select one, and create a symbolic link named `current-config.ini` that points to the selected configuration file.
