@@ -40,6 +40,8 @@ def prompt_user_selection(configurations):
                 return configurations[choice - 1]
             else:
                 raise ValueError
+        except KeyboardInterrupt:
+            return None
         except ValueError:
             print("Invalid selection. Please enter a number corresponding to the configuration file.")
 
@@ -65,8 +67,9 @@ def main(config_dir, symlink_path):
             print(f"{i}. {config}")
 
     selected_file = prompt_user_selection(configurations)
-    new_target = os.path.join(config_dir, selected_file)
-    update_symlink(symlink_path, new_target)
+    if (selected_file != None):
+        new_target = os.path.join(config_dir, selected_file)
+        update_symlink(symlink_path, new_target)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Manage configuration files via symlink.")
