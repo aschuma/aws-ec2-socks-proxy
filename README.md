@@ -196,6 +196,34 @@ Run the script directly to start the SSH tunnel. It will automatically fetch the
 ./SSH.py
 ```
 
+## Troubleshooting
+
+### No Default VPC for This User
+
+#### What This Means
+
+Every AWS region typically comes with a default VPC (Virtual Private Cloud) that's automatically created when you first access EC2 services in that region. If you're encountering this error, it means:
+
+- **The default VPC was deleted** - Either accidentally or intentionally removed from your AWS account
+- **You're in a new region** - That hasn't been initialized with EC2 services yet
+- **Account limitations** - In rare cases, certain account types might not have default VPCs created automatically
+
+#### How to Fix It
+
+Create a New Default VPC
+
+**Using AWS CLI:**
+```bash
+aws ec2 create-default-vpc --region <your-region>
+```
+
+**Using AWS Console:**
+1. Navigate to the VPC Dashboard in AWS Console for the affected region
+2. Click "Actions" → "Create Default VPC"
+3. Confirm the creation
+
+
+
 ## Links
 
 * AWS account creation: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/
