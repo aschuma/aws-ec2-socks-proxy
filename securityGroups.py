@@ -50,10 +50,18 @@ def create_awssocks_security_group():
                 },
             ],
         )
+        # Allow SSH access
         security_group.authorize_ingress(
             CidrIp='0.0.0.0/0',
             FromPort=22,
             ToPort=22,
+            IpProtocol='tcp',
+        )
+        # Allow Shadowsocks traffic
+        security_group.authorize_ingress(
+            CidrIp='0.0.0.0/0',
+            FromPort=8388,
+            ToPort=8388,
             IpProtocol='tcp',
         )
         logger.info("The security group %s has been successfully created.", AWSSOCKS_SECURITY_GROUP_NAME)
