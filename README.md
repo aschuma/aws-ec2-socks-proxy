@@ -47,7 +47,7 @@ The steps to use this repository are as follows:
   start the SOCKS tunnel.
 * Configure your browser to use `localhost:4444` as the SOCKSv5 proxy. Also, ensure that you have selected the option `Proxy DNS when using SOCKS v5` in your browser's proxy settings. Please refer to the browser's documentation to learn how to do this. I use Firefox because it doesn't depend on the operating system's settings, allowing me to easily adjust the SOCKS proxy settings.
 
-You can now browse the web in your selected region without GeoIP restrictions.
+You can now browse the web in your selected region.
 
 To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, you have the option to set a time-to-live value in the `config.ini` file. When configured, the instance will automatically terminate itself after the specified period has elapsed (BETA feature).
 
