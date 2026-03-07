@@ -2,3 +2,4 @@ config.ini
 current-config.ini
 configs/*
 __pycache__
+.venv/

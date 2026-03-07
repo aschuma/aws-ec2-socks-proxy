@@ -30,7 +30,7 @@ Please consult also [Specify which AWS Regions your account can use](https://doc
 You will need an SSH key. To generate one, use the `ssh-keygen` command. You can easily find a tutorial online to learn
 how to use it.
 
-Additionally, Python 3 must be installed on your machine.
+Additionally, Python 3.10+ and `uv` must be installed on your machine.
 
 ## Setup
 
@@ -40,16 +40,17 @@ The steps to use this repository are as follows:
 * Change directory into the cloned project by using the `cd` command.
 * Copy `config.ini_template` to `config.ini` and update the values for the SSH key name and AWS region in the newly created
   file.
-* Create a virtual Python environment: `python3 -m venv venv`.
-* Activate the environment: `source venv/bin/activate`
-* Install the requirements: `pip install -r requirements.txt`.
-* Run `START.py`, which will start the EC2 instance. The script will provide an SSH command, which you should execute to
+* Install dependencies and create the virtual environment with `uv sync`.
+* Activate the environment once with `source .venv/bin/activate`.
+* Run `./START.py`, which will start the EC2 instance. The script will provide an SSH command, which you should execute to
   start the SOCKS tunnel.
 * Configure your browser to use `localhost:4444` as the SOCKSv5 proxy. Also, ensure that you have selected the option `Proxy DNS when using SOCKS v5` in your browser's proxy settings. Please refer to the browser's documentation to learn how to do this. I use Firefox because it doesn't depend on the operating system's settings, allowing me to easily adjust the SOCKS proxy settings.
 
 You can now browse the web in your selected region.
 
-To shut down the EC2 instance, simply run the `STOP.py` script. Alternatively, you have the option to set a time-to-live value in the `config.ini` file. When configured, the instance will automatically terminate itself after the specified period has elapsed (BETA feature).
+To shut down the EC2 instance, simply run `./STOP.py`. Alternatively, you have the option to set a time-to-live value in the `config.ini` file. When configured, the instance will automatically terminate itself after the specified period has elapsed (BETA feature).
+
+If you prefer one-off commands without activation, you can still use `uv run ./START.py`, `uv run ./STOP.py`, and `uv run ./STATUS.py`.
 
 ## Example script output
 
