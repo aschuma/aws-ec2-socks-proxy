@@ -30,7 +30,7 @@ Please consult also [Specify which AWS Regions your account can use](https://doc
 You will need an SSH key. To generate one, use the `ssh-keygen` command. You can easily find a tutorial online to learn
 how to use it.
 
-Additionally, Python 3.10+ and `uv` must be installed on your machine.
+Additionally, Python 3.10+ and `uv` must be installed on your machine. You can find `uv` here: [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/).
 
 ## Setup
 
@@ -230,4 +230,5 @@ aws ec2 create-default-vpc --region <your-region>
 * AWS account creation: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/
 * AWS manage entitled regions: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
 * AWS CLI setup: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+* uv documentation: https://docs.astral.sh/uv/
 * Some boto3 Python examples: https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python
