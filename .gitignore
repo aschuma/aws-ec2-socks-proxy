@@ -3,3 +3,5 @@ current-config.ini
 configs/*
 __pycache__
 .venv/
+RUN.py
+DEL.py
