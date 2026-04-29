@@ -8,7 +8,7 @@ awssocks_key = id_rsa
 awssocks_region = eu-west-2
 
 # the ec2 instance type candidates - nano types should be sufficient
-awssocks_ec2_instance_size = t3.nano,t2.nano
+awssocks_ec2_instance_size = t3.nano,t3a.nano,t2.nano
 
 # the ec2 architecture - "x86_64"
 awssocks_ec2_architecture = x86_64
