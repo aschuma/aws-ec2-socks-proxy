@@ -18,21 +18,21 @@ def awssocks_ami_image():
 
         amzn2_amis_any_arch = [ap for ap in ami_params if
                                all(query in ap['Name'] for query
-                                   in ('amzn2', 'gp2'))]
+                                   in ('al2023'))]
 
         amzn2_amis = [ap for ap in amzn2_amis_any_arch if
                       AWSSOCKS_EC2_ARCHITECTURE in ap['Name']]
 
         if len(amzn2_amis) > 0:
             ami_image_id = amzn2_amis[0]['Value']
-            logger.info("Found an Amazon Machine Image (AMI) that includes Amazon Linux 2, "
-                        "an x64 architecture, and a general-purpose EBS volume: %s",
+            logger.info("Found an Amazon Machine Image (AMI) that includes Amazon Linux 2023, "
+                        "an x64 architecture, and a general-purpose EBS volume (gp3): %s",
                         str(amzn2_amis[0]))
             return ami_image_id
         elif len(amzn2_amis_any_arch) > 0:
             ami_image_id = amzn2_amis_any_arch[0]['Value']
-            logger.info("Found an Amazon Machine Image (AMI) that includes Amazon Linux 2, "
-                        "and a general-purpose EBS volume: %s",
+            logger.info("Found an Amazon Machine Image (AMI) that includes Amazon Linux 2023, "
+                        "and a general-purpose EBS volume (gp3): %s",
                         str(amzn2_amis_any_arch[0]))
             return ami_image_id
         elif len(ami_params) > 0:
